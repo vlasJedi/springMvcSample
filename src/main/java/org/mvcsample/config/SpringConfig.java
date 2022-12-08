@@ -1,5 +1,6 @@
 package org.mvcsample.config;
 
+import org.mvcsample.dao.UsersDAO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.annotation.Bean;
@@ -41,15 +42,12 @@ public class SpringConfig implements WebMvcConfigurer {
         return templateEngine;
     }
 
-//    @Bean
-//    public ThymeleafViewResolver viewResolver() {
-//        ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
-//        viewResolver.setTemplateEngine(templateEngine());
-//        viewResolver.setOrder(1);
-//        viewResolver.setViewNames(new String[]{"*"});
-//        return viewResolver;
-//    }
+    @Bean
+    public UsersDAO usersDAO() {
+        return new UsersDAO();
+    }
 
+    // this method overrides default impl coming from abstract class
     public void configureViewResolvers(ViewResolverRegistry viewResolverRegistry) {
         ThymeleafViewResolver viewResolver = new ThymeleafViewResolver();
         viewResolver.setTemplateEngine(templateEngine());
